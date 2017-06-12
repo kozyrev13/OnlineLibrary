@@ -1,6 +1,7 @@
 package net.kozyrev.onlinelibrary.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "library_users")
@@ -10,21 +11,34 @@ public class LibraryUser {
     @GeneratedValue(strategy = GenerationType.AUTO )
     private Long id;
 
-    @Column
+    @Column(name = "firstname")
     private String firstName;
 
-    @Column
+    @Column(name = "lastname")
     private String lastName;
 
-    @Column
+    @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column
+    @Column(name = "email")
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @PrimaryKeyJoinColumn
     private User user;
+
+    @ManyToMany
+    @JoinTable(name = "issued_books", joinColumns = @JoinColumn(name = "id_library_user"),
+            inverseJoinColumns = @JoinColumn(name = "id_book"))
+    private Set<Book> books;
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        books = books;
+    }
 
     public Long getId() {
         return id;
