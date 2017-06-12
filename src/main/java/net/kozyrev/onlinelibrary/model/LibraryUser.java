@@ -3,7 +3,7 @@ package net.kozyrev.onlinelibrary.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "library_user")
+@Table(name = "library_users")
 public class LibraryUser {
 
     @Id
