@@ -29,6 +29,29 @@
         </h2>
 
     </c:if>
+    <h3>Books</h3>
+    <c:if test="${!empty contactList}">
+        <table class="data">
+            <tr>
+                <th>Title </th>
+                <th>Authoe </th>
+                <th>Pages </th>
+                <th>Year </th>
+                <th>Quantity </th>
+                <th>&nbsp;</th>
+            </tr>
+            <c:forEach items="${contactList}" var="contact">
+                <tr>
+                    <td>${contact.title}</td>
+                    <td>${contact.author}</td>
+                    <td>${contact.pages}</td>
+                    <td>${contact.year}</td>
+                    <td>${contact.quantity}</td>
+                    <td><a href="take/${contact.id}">Take</a></td>
+                </tr>
+            </c:forEach>
+        </table>
+    </c:if>
 
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
