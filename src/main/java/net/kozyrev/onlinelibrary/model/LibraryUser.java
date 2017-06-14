@@ -8,7 +8,6 @@ import java.util.Set;
 public class LibraryUser {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO )
     private Long id;
 
     @Column(name = "firstname")

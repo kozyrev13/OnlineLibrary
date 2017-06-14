@@ -2,11 +2,9 @@ package net.kozyrev.onlinelibrary.controller;
 
 import net.kozyrev.onlinelibrary.model.Book;
 import net.kozyrev.onlinelibrary.model.IssuedBook;
+import net.kozyrev.onlinelibrary.model.LibraryUser;
 import net.kozyrev.onlinelibrary.model.User;
-import net.kozyrev.onlinelibrary.service.BookService;
-import net.kozyrev.onlinelibrary.service.IssuedBookService;
-import net.kozyrev.onlinelibrary.service.SecurityService;
-import net.kozyrev.onlinelibrary.service.UserService;
+import net.kozyrev.onlinelibrary.service.*;
 import net.kozyrev.onlinelibrary.validator.UserValidator;
 import org.hibernate.annotations.Synchronize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +28,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private LibraryUserService libraryUserService;
 
     @Autowired
     private BookService bookService;
@@ -62,8 +63,26 @@ public class UserController {
 
         securityService.autoLogin(userForm.getUsername(),userForm.getConfirmPassword());
 
+        return "redirect:/newlibraryuser";
+    }
+
+    @RequestMapping(value = "/newlibraryuser", method = RequestMethod.GET)
+    public String registration2(Map<String, Object> map ) {
+        map.put("contact", new LibraryUser());
+        return "registration2";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String addContact(@ModelAttribute("contact") LibraryUser libraryUser,
+                             BindingResult result) {
+        String s = SecurityContextHolder.getContext().getAuthentication().getName();
+        libraryUser.setId(userService.findByUsername(s).getId());
+        libraryUserService.save(libraryUser);
+
         return "redirect:/welcome";
     }
+
+
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
@@ -81,6 +100,7 @@ public class UserController {
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
     public String listContacts(Map<String, Object> map) {
         String s = SecurityContextHolder.getContext().getAuthentication().getName();
+        map.put("libraryuser", new LibraryUser());
         map.put("bookList", bookService.listBook());
         map.put("issuedBookList",issuedBookService.listIssuedBookByUserId(userService.findByUsername(s).getId()));
         return "welcome";
