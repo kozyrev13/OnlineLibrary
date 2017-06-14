@@ -35,7 +35,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByUsername(String username) {
-        return userDAO.findByUsername(username);
+    public User findByUsername(String username) {return userDAO.findByUsername(username);
     }
 }

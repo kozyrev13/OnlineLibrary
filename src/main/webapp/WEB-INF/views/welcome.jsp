@@ -33,11 +33,11 @@
     <c:if test="${!empty contactList}">
         <table class="data">
             <tr>
-                <th>Title </th>
-                <th>Authoe </th>
-                <th>Pages </th>
-                <th>Year </th>
-                <th>Quantity </th>
+                <th>&emsp;Title&emsp; </th>
+                <th>&emsp;Author&emsp; </th>
+                <th>&emsp;Pages&emsp; </th>
+                <th>&emsp;Year&emsp; </th>
+                <th>&emsp;Quantity&emsp; </th>
                 <th>&nbsp;</th>
             </tr>
             <c:forEach items="${contactList}" var="contact">
@@ -48,6 +48,28 @@
                     <td>${contact.year}</td>
                     <td>${contact.quantity}</td>
                     <td><a href="take/${contact.id}">Take</a></td>
+                </tr>
+            </c:forEach>
+        </table>
+    </c:if>
+
+    <h2>${libname}</h2>
+    <h3>Your Books</h3>
+    <c:if test="${!empty issuedBookList}">
+        <table class="data">
+            <tr>
+                <th>&emsp;Id&emsp;</th>
+                <th>&emsp;Id_book&emsp; </th>
+                <th>&emsp;Id_User&emsp; </th>
+                <th>&emsp;Time&emsp; </th>
+
+            </tr>
+            <c:forEach items="${issuedBookList}" var="issuedBook">
+                <tr>
+                    <td>${issuedBook.id}</td>
+                    <td>${issuedBook.id_Book}</td>
+                    <td>${issuedBook.id_LibraryUser}</td>
+                    <td>${issuedBook.time}</td>
                 </tr>
             </c:forEach>
         </table>

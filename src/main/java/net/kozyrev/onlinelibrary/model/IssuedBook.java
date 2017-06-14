@@ -3,6 +3,7 @@ package net.kozyrev.onlinelibrary.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -21,7 +22,7 @@ public class IssuedBook implements Serializable {
     private Long id_Book;
 
     @Column(name = "time")
-    private Date time;
+    private Timestamp time;
 
 
     public Long getId() {
@@ -52,7 +53,7 @@ public class IssuedBook implements Serializable {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(Timestamp time) {
         this.time = time;
     }
 }

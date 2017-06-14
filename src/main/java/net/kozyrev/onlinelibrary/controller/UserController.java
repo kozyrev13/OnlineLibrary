@@ -1,20 +1,28 @@
 package net.kozyrev.onlinelibrary.controller;
 
 import net.kozyrev.onlinelibrary.model.Book;
+import net.kozyrev.onlinelibrary.model.IssuedBook;
 import net.kozyrev.onlinelibrary.model.User;
 import net.kozyrev.onlinelibrary.service.BookService;
+import net.kozyrev.onlinelibrary.service.IssuedBookService;
 import net.kozyrev.onlinelibrary.service.SecurityService;
 import net.kozyrev.onlinelibrary.service.UserService;
 import net.kozyrev.onlinelibrary.validator.UserValidator;
+import org.hibernate.annotations.Synchronize;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Map;
 
 @Controller
@@ -25,6 +33,9 @@ public class UserController {
 
     @Autowired
     private BookService bookService;
+
+    @Autowired
+    private IssuedBookService issuedBookService;
 
     @Autowired
     private SecurityService securityService;
@@ -68,16 +79,27 @@ public class UserController {
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
     public String listContacts(Map<String, Object> map) {
 
-        map.put("contact", new Book());
+        //map.put("contact1", new Book());
         map.put("contactList", bookService.listBook());
+        map.put("issuedBookList",issuedBookService.listIssuedBook());
+        String s = SecurityContextHolder.getContext().getAuthentication().getName();
+        map.put("libname",userService.findByUsername(s).getId());
+        //map.put("libname",name);
+
 
         return "welcome";
     }
-
+    @Transactional
     @RequestMapping("/take/{contactId}")
     public String deleteContact(@PathVariable("contactId") Long contactId) {
-
+        String s = SecurityContextHolder.getContext().getAuthentication().getName();
         bookService.decrementQuantity(contactId);
+        IssuedBook issuedBook = new IssuedBook();
+        issuedBook.setId_Book(contactId);
+        issuedBook.setId_LibraryUser(userService.findByUsername(s).getId());
+        Date date = new Date();
+        issuedBook.setTime(new Timestamp(date.getTime()));
+        issuedBookService.addIssuedBook(issuedBook);
 
         return "redirect:/welcome";
     }
