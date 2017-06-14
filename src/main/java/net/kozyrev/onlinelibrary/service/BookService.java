@@ -13,5 +13,9 @@ public interface BookService {
 
     void removeBook(Long id);
 
+    Book findBookById(Long id);
+
     void decrementQuantity(Long id);
+
+    void incrementQuantity(Long id);
 }

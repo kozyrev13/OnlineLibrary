@@ -7,9 +7,13 @@ import java.util.List;
 
 public interface IssuedBookService {
 
+    IssuedBook findById(Long id);
+
     void addIssuedBook(IssuedBook book);
 
     List<IssuedBook> listIssuedBook();
+
+    List<IssuedBook> listIssuedBookByUserId(Long id);
 
     void removeIssuedBook(Long id);
 }

@@ -43,6 +43,8 @@ public class UserController {
     @Autowired
     private UserValidator userValidator;
 
+
+
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model ) {
         model.addAttribute("userForm",new User());
@@ -78,20 +80,14 @@ public class UserController {
 
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
     public String listContacts(Map<String, Object> map) {
-
-        //map.put("contact1", new Book());
-        map.put("contactList", bookService.listBook());
-        map.put("issuedBookList",issuedBookService.listIssuedBook());
         String s = SecurityContextHolder.getContext().getAuthentication().getName();
-        map.put("libname",userService.findByUsername(s).getId());
-        //map.put("libname",name);
-
-
+        map.put("bookList", bookService.listBook());
+        map.put("issuedBookList",issuedBookService.listIssuedBookByUserId(userService.findByUsername(s).getId()));
         return "welcome";
     }
     @Transactional
-    @RequestMapping("/take/{contactId}")
-    public String deleteContact(@PathVariable("contactId") Long contactId) {
+    @RequestMapping("/take/{bookId}")
+    public String takeBook(@PathVariable("bookId") Long contactId) {
         String s = SecurityContextHolder.getContext().getAuthentication().getName();
         bookService.decrementQuantity(contactId);
         IssuedBook issuedBook = new IssuedBook();
@@ -100,7 +96,15 @@ public class UserController {
         Date date = new Date();
         issuedBook.setTime(new Timestamp(date.getTime()));
         issuedBookService.addIssuedBook(issuedBook);
+        return "redirect:/welcome";
+    }
 
+    @Transactional
+    @RequestMapping("/return/{issuedBookId}")
+    public String deleteIssuedBook(@PathVariable("issuedBookId") Long contactId) {
+        Long idBook = issuedBookService.findById(contactId).getId_Book();
+        issuedBookService.removeIssuedBook(contactId);
+        bookService.incrementQuantity(idBook);
         return "redirect:/welcome";
     }
 

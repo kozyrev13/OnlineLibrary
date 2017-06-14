@@ -11,8 +11,15 @@ import java.util.List;
 @Service
 public class IssuedBookServiceImpl implements IssuedBookService {
 
+
+
     @Autowired
     private IssuedBookDAO issuedBookDAO;
+
+    @Override
+    public IssuedBook findById(Long id) {
+        return issuedBookDAO.findOne(id);
+    }
 
     @Override
     public void addIssuedBook(IssuedBook book) {
@@ -27,5 +34,10 @@ public class IssuedBookServiceImpl implements IssuedBookService {
     @Override
     public void removeIssuedBook(Long id) {
         issuedBookDAO.delete(id);
+    }
+
+    @Override
+    public List<IssuedBook> listIssuedBookByUserId(Long id) {
+        return issuedBookDAO.findAllByUserID(id);
     }
 }

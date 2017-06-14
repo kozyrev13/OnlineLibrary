@@ -15,6 +15,8 @@ public class BookServiceImpl implements BookService {
     @Autowired
     private BookDAO bookDAO;
 
+
+
     @Override
     public void addBook(Book book) {
         bookDAO.save(book);
@@ -34,5 +36,19 @@ public class BookServiceImpl implements BookService {
     @Override
     public void decrementQuantity(Long id) {
         bookDAO.decrementQuantity(id);
+    }
+
+    @Override
+    public void incrementQuantity(Long id) {
+        bookDAO.incrementQuantity(id);
+    }
+
+    @Override
+    public Book findBookById(Long id){
+        return bookDAO.findOne(id);
+    }
+
+    public String abc() {
+        return "abc";
     }
 }

@@ -30,9 +30,10 @@
 
     </c:if>
     <h3>Books</h3>
-    <c:if test="${!empty contactList}">
+    <c:if test="${!empty bookList}">
         <table class="data">
             <tr>
+                <th>&emsp;Id&emsp;</th>
                 <th>&emsp;Title&emsp; </th>
                 <th>&emsp;Author&emsp; </th>
                 <th>&emsp;Pages&emsp; </th>
@@ -40,21 +41,24 @@
                 <th>&emsp;Quantity&emsp; </th>
                 <th>&nbsp;</th>
             </tr>
-            <c:forEach items="${contactList}" var="contact">
+            <c:forEach items="${bookList}" var="book">
                 <tr>
-                    <td>${contact.title}</td>
-                    <td>${contact.author}</td>
-                    <td>${contact.pages}</td>
-                    <td>${contact.year}</td>
-                    <td>${contact.quantity}</td>
-                    <td><a href="take/${contact.id}">Take</a></td>
+                    <td>&emsp;${book.id}&emsp;</td>
+                    <td>&emsp;${book.title}&emsp;</td>
+                    <td>&emsp;${book.author}&emsp;</td>
+                    <td>&emsp;${book.pages}&emsp;</td>
+                    <td>&emsp;${book.year}&emsp;</td>
+                    <td>&emsp;${book.quantity}&emsp;</td>
+                    <td><a href="take/${book.id}">Take</a></td>
                 </tr>
             </c:forEach>
         </table>
     </c:if>
 
-    <h2>${libname}</h2>
+
     <h3>Your Books</h3>
+
+
     <c:if test="${!empty issuedBookList}">
         <table class="data">
             <tr>
@@ -62,18 +66,22 @@
                 <th>&emsp;Id_book&emsp; </th>
                 <th>&emsp;Id_User&emsp; </th>
                 <th>&emsp;Time&emsp; </th>
+                <th>&nbsp;</th>
 
             </tr>
             <c:forEach items="${issuedBookList}" var="issuedBook">
                 <tr>
-                    <td>${issuedBook.id}</td>
-                    <td>${issuedBook.id_Book}</td>
-                    <td>${issuedBook.id_LibraryUser}</td>
-                    <td>${issuedBook.time}</td>
+
+                    <td>&emsp;${issuedBook.id}&emsp;</td>
+                    <td>&emsp;${issuedBook.id_Book}&emsp;</td>
+                    <td>&emsp;${issuedBook.id_LibraryUser}&emsp;</td>
+                    <td>&emsp;${issuedBook.time}&emsp;</td>
+                    <td><a href="return/${issuedBook.id}">Return</a></td>
                 </tr>
             </c:forEach>
         </table>
     </c:if>
+
 
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
