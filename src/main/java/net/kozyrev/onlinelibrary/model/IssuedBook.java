@@ -24,6 +24,14 @@ public class IssuedBook implements Serializable {
     @Column(name = "time")
     private Timestamp time;
 
+    public IssuedBook() {
+    }
+
+    public IssuedBook(Long id_LibraryUser, Long id_Book) {
+        this.id_LibraryUser = id_LibraryUser;
+        this.id_Book = id_Book;
+        this.time = new Timestamp(new Date().getTime());
+    }
 
     public Long getId() {
         return id;

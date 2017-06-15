@@ -25,34 +25,42 @@
 </head>
 <div class="container">
 
-    <form:form method="post" action="/add" commandName="contact">
+    <form:form method="POST" modelAttribute="libraryUserForm" class="form-signin">
+        <h2 class="form-signin-heading">Create your account</h2>
+        <spring:bind path="firstName">
+            <div >
+                <form:input type="text" path="firstName" class="form-control" placeholder="Firstname"
+                            autofocus="true"></form:input>
 
-        <table>
-            <tr>
-                <td></td>
-                <td><form:input path="id" /></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><form:input path="firstName" /></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><form:input path="lastName" /></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><form:input path="email" /></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><form:input path="phoneNumber" /></td>
-            </tr>
-            <tr>
-                <td colspan="2"><input type="submit"
-                                       value="Go" /></td>
-            </tr>
-        </table>
+            </div>
+        </spring:bind>
+
+        <spring:bind path="lastName">
+            <div >
+                <form:input type="text" path="lastName" class="form-control" placeholder="Lastname"
+                            autofocus="true"></form:input>
+
+            </div>
+        </spring:bind>
+
+        <spring:bind path="phoneNumber">
+            <div >
+                <form:input type="text" path="phoneNumber" class="form-control" placeholder="Phonr Number"
+                            autofocus="true"></form:input>
+
+            </div>
+        </spring:bind>
+
+        <spring:bind path="email">
+            <div >
+                <form:input type="text" path="email" class="form-control" placeholder="Email"
+                            autofocus="true"></form:input>
+
+            </div>
+        </spring:bind>
+
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
     </form:form>
 
 </div>

@@ -15,12 +15,16 @@ public class BookServiceImpl implements BookService {
     @Autowired
     private BookDAO bookDAO;
 
-
+    public Integer id;
 
     @Override
     public void addBook(Book book) {
         bookDAO.save(book);
 
+    }
+
+    public Integer getId(){
+        return this.id;
     }
 
     @Override
