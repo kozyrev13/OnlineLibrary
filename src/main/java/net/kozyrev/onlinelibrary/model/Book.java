@@ -1,7 +1,6 @@
 package net.kozyrev.onlinelibrary.model;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 
@@ -27,9 +26,6 @@ public class Book {
 
     @Column(name = "quantity")
     private Integer quantity;
-
-   // @OneToMany(mappedBy = "books")
-   // List<IssuedBook> issuedBookList;
 
     @ManyToMany(mappedBy = "books")
     private Set<LibraryUser> users;

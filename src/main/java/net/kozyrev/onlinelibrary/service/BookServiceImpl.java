@@ -15,7 +15,11 @@ public class BookServiceImpl implements BookService {
     @Autowired
     private BookDAO bookDAO;
 
-    public Integer id;
+    public Long id;
+
+    public Long getId(){
+        return this.id;
+    }
 
     @Override
     public void addBook(Book book) {
@@ -23,8 +27,9 @@ public class BookServiceImpl implements BookService {
 
     }
 
-    public Integer getId(){
-        return this.id;
+    @Override
+    public String getBookByIdFromJsp() {
+        return "";
     }
 
     @Override
@@ -52,7 +57,12 @@ public class BookServiceImpl implements BookService {
         return bookDAO.findOne(id);
     }
 
-    public String abc() {
-        return "abc";
+    @Override
+    public List<Book> getBookLIstByUserId(Long id) {
+       return bookDAO.getBookLIstByUserId(id);
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

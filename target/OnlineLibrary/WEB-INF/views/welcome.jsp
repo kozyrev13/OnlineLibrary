@@ -29,59 +29,94 @@
         </h2>
 
     </c:if>
-    <h3>Books</h3>
-    <c:if test="${!empty bookList}">
-        <table class="data">
-            <tr>
-                <th>&emsp;Id&emsp;</th>
-                <th>&emsp;Title&emsp; </th>
-                <th>&emsp;Author&emsp; </th>
-                <th>&emsp;Pages&emsp; </th>
-                <th>&emsp;Year&emsp; </th>
-                <th>&emsp;Quantity&emsp; </th>
-                <th>&nbsp;</th>
-            </tr>
-            <c:forEach items="${bookList}" var="book">
-                <tr>
-                    <td>&emsp;${book.id}&emsp;</td>
-                    <td>&emsp;${book.title}&emsp;</td>
-                    <td>&emsp;${book.author}&emsp;</td>
-                    <td>&emsp;${book.pages}&emsp;</td>
-                    <td>&emsp;${book.year}&emsp;</td>
-                    <td>&emsp;${book.quantity}&emsp;</td>
-                    <td><a href="take/${book.id}">Take</a></td>
-                </tr>
-            </c:forEach>
-        </table>
-    </c:if>
+    <table>
+        <tr>
+            <td>
+                <h3>Library Books</h3>
+                <c:if test="${!empty bookList}">
+                    <table class="data">
+                        <tr>
+                            <th>&emsp;Id&emsp;</th>
+                            <th>&emsp;Title&emsp;</th>
+                            <th>&emsp;Author&emsp;</th>
+                            <th>&emsp;Pages&emsp;</th>
+                            <th>&emsp;Year&emsp;</th>
+                            <th>&emsp;Quantity&emsp;</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                        <c:forEach items="${bookList}" var="book">
+                            <tr>
+                                <td>&emsp;${book.id}&emsp;</td>
+                                <td>&emsp;${book.title}&emsp;</td>
+                                <td>&emsp;${book.author}&emsp;</td>
+                                <td>&emsp;${book.pages}&emsp;</td>
+                                <td>&emsp;${book.year}&emsp;</td>
+                                <td>&emsp;${book.quantity}&emsp;</td>
+                                <td><a href="take/${book.id}">Take</a></td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </c:if>
+            </td>
+            <td>
+                <h3>Books Description # using @Query nativeQuery = true</h3>
+                <c:if test="${!empty userbooklist}">
+                    <table class="data">
+                        <tr>
+                            <th>&emsp;Title&emsp;</th>
+                            <th>&emsp;Author&emsp;</th>
+                            <th>&emsp;Year&emsp;</th>
+                            <th>&emsp;Pages&emsp;</th>
+                            <th>&nbsp;</th>
+
+                        </tr>
+                        <c:forEach items="${userbooklist}" var="userbook">
+                            <tr>
+                                <td>&emsp;${userbook.title}&emsp;</td>
+                                <td>&emsp;${userbook.author}&emsp;</td>
+                                <td>&emsp;${userbook.year}&emsp;</td>
+                                <td>&emsp;${userbook.pages}&emsp;</td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </c:if>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h3>All Your Books # using @query</h3>
 
 
-    <h3>Your Books</h3>
+                <c:if test="${!empty issuedBookList}">
+                    <table class="data">
+                        <tr>
+                            <th>&emsp;Operation Id&emsp;</th>
+                            <th>&emsp;Book Id&emsp;</th>
+                            <th>&emsp;User Id&emsp;</th>
+                            <th>&emsp;Time&emsp;</th>
+                            <th>&nbsp;</th>
+
+                        </tr>
+                        <c:forEach items="${issuedBookList}" var="issuedBook">
+                            <tr>
+
+                                <td>&emsp;${issuedBook.id}&emsp;</td>
+                                <td>&emsp;${issuedBook.id_Book}&emsp;</td>
+                                <td>&emsp;${issuedBook.id_LibraryUser}&emsp;</td>
+                                <td>&emsp;${issuedBook.time}&emsp;</td>
+                                <td><a href="return/${issuedBook.id}">Return</a></td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </c:if>
+            </td>
+            <td>
+
+            </td>
+        </tr>
 
 
-    <c:if test="${!empty issuedBookList}">
-        <table class="data">
-            <tr>
-                <th>&emsp;Id&emsp;</th>
-                <th>&emsp;Id_book&emsp; </th>
-                <th>&emsp;Id_User&emsp; </th>
-                <th>&emsp;Time&emsp; </th>
-                <th>&nbsp;</th>
-
-            </tr>
-            <c:forEach items="${issuedBookList}" var="issuedBook">
-                <tr>
-
-                    <td>&emsp;${issuedBook.id}&emsp;</td>
-                    <td>&emsp;${issuedBook.id_Book}&emsp;</td>
-                    <td>&emsp;${issuedBook.id_LibraryUser}&emsp;</td>
-                    <td>&emsp;${issuedBook.time}&emsp;</td>
-                    <td><a href="return/${issuedBook.id}">Return</a></td>
-                </tr>
-            </c:forEach>
-        </table>
-    </c:if>
-
+    </table>
 
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

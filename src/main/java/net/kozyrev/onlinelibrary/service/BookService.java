@@ -18,4 +18,8 @@ public interface BookService {
     void decrementQuantity(Long id);
 
     void incrementQuantity(Long id);
+
+    List<Book> getBookLIstByUserId(Long id);
+
+    String getBookByIdFromJsp();
 }

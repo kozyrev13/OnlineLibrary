@@ -32,6 +32,7 @@ public class LibraryController {
         map.put("libraryuser", new LibraryUser());
         map.put("bookList", bookService.listBook());
         map.put("issuedBookList",issuedBookService.listIssuedBookByUserId(getAuthorizedUserId()));
+        map.put("userbooklist",bookService.getBookLIstByUserId(getAuthorizedUserId()));
         return "welcome";
     }
     @Transactional
