@@ -6,6 +6,8 @@ import net.kozyrev.onlinelibrary.model.LibraryUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class LibraryUserServiceImpl implements LibraryUserService {
 
@@ -15,5 +17,10 @@ public class LibraryUserServiceImpl implements LibraryUserService {
     @Override
     public void save(LibraryUser libraryUser) {
         libraryUserDAO.save(libraryUser);
+    }
+
+    @Override
+    public List<LibraryUser> getList() {
+        return libraryUserDAO.findAll();
     }
 }

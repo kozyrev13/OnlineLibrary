@@ -27,7 +27,7 @@ public class Book {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @ManyToMany(mappedBy = "books")
+    @ManyToMany(mappedBy = "books",cascade = CascadeType.ALL)
     private Set<LibraryUser> users;
 
     public Long getId() {

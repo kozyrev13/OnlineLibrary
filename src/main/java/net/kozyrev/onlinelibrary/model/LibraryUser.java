@@ -26,7 +26,7 @@ public class LibraryUser {
     @PrimaryKeyJoinColumn
     private User user;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "issued_books", joinColumns = @JoinColumn(name = "id_library_user"),
             inverseJoinColumns = @JoinColumn(name = "id_book"))
     private Set<Book> books;

@@ -16,4 +16,8 @@ public interface IssuedBookService {
     List<IssuedBook> listIssuedBookByUserId(Long id);
 
     void removeIssuedBook(Long id);
+
+    void removeIssuedBookByIdBook(Long id,Long idi);
+
+
 }

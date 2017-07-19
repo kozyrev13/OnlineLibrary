@@ -31,7 +31,7 @@
     </c:if>
     <table>
         <tr>
-            <td>
+            <td valign="top">
                 <h3>Library Books</h3>
                 <c:if test="${!empty bookList}">
                     <table class="data">
@@ -58,8 +58,8 @@
                     </table>
                 </c:if>
             </td>
-            <td>
-                <h3>Books Description # using @Query nativeQuery = true</h3>
+            <td valign="top">
+                <h3>Books</h3>
                 <c:if test="${!empty userbooklist}">
                     <table class="data">
                         <tr>
@@ -76,44 +76,14 @@
                                 <td>&emsp;${userbook.author}&emsp;</td>
                                 <td>&emsp;${userbook.year}&emsp;</td>
                                 <td>&emsp;${userbook.pages}&emsp;</td>
+                                <td><a href="return/${userbook.id}">Return</a></td>
                             </tr>
                         </c:forEach>
                     </table>
                 </c:if>
             </td>
         </tr>
-        <tr>
-            <td>
-                <h3>All Your Books # using @query</h3>
 
-
-                <c:if test="${!empty issuedBookList}">
-                    <table class="data">
-                        <tr>
-                            <th>&emsp;Operation Id&emsp;</th>
-                            <th>&emsp;Book Id&emsp;</th>
-                            <th>&emsp;User Id&emsp;</th>
-                            <th>&emsp;Time&emsp;</th>
-                            <th>&nbsp;</th>
-
-                        </tr>
-                        <c:forEach items="${issuedBookList}" var="issuedBook">
-                            <tr>
-
-                                <td>&emsp;${issuedBook.id}&emsp;</td>
-                                <td>&emsp;${issuedBook.id_Book}&emsp;</td>
-                                <td>&emsp;${issuedBook.id_LibraryUser}&emsp;</td>
-                                <td>&emsp;${issuedBook.time}&emsp;</td>
-                                <td><a href="return/${issuedBook.id}">Return</a></td>
-                            </tr>
-                        </c:forEach>
-                    </table>
-                </c:if>
-            </td>
-            <td>
-
-            </td>
-        </tr>
 
 
     </table>

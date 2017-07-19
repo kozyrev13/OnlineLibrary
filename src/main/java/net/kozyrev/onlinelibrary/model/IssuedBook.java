@@ -17,12 +17,14 @@ public class IssuedBook implements Serializable {
     @Column(name = "id_library_user")
     private Long id_LibraryUser;
 
-
     @Column(name = "id_book")
     private Long id_Book;
 
-    @Column(name = "time")
+    @Column(name = "issue_time")
     private Timestamp time;
+
+    @Column(name = "return_time")
+    private Timestamp returnTime;
 
     public IssuedBook() {
     }
@@ -31,6 +33,14 @@ public class IssuedBook implements Serializable {
         this.id_LibraryUser = id_LibraryUser;
         this.id_Book = id_Book;
         this.time = new Timestamp(new Date().getTime());
+    }
+
+    public Timestamp getReturnTime() {
+        return returnTime;
+    }
+
+    public void setReturnTime(Timestamp returnTime) {
+        this.returnTime = returnTime;
     }
 
     public Long getId() {

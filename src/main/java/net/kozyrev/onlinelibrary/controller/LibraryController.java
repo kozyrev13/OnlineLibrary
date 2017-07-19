@@ -44,11 +44,11 @@ public class LibraryController {
     }
 
     @Transactional
-    @RequestMapping("/return/{issuedBookId}")
-    public String deleteIssuedBook(@PathVariable("issuedBookId") Long contactId) {
-        Long idBook = issuedBookService.findById(contactId).getId_Book();
-        issuedBookService.removeIssuedBook(contactId);
-        bookService.incrementQuantity(idBook);
+    @RequestMapping("/return/{BookId}")
+    public String deleteIssuedBook(@PathVariable("BookId") Long bookId) {
+
+        issuedBookService.removeIssuedBookByIdBook(bookId,getAuthorizedUserId());
+        bookService.incrementQuantity(bookId);
         return "redirect:/welcome";
     }
 }
